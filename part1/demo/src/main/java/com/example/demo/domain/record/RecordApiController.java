@@ -5,7 +5,6 @@ import com.example.demo.domain.record.dto.ResponseAddRecord;
 import com.example.demo.domain.record.dto.ResponseGetRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/api/records")
 public class RecordApiController {
     private final RecordService recordService;

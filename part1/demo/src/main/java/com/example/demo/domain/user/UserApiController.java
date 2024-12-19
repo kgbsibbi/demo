@@ -5,13 +5,12 @@ import com.example.demo.domain.user.dto.ResponseAddUser;
 import com.example.demo.domain.user.dto.ResponseGetUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/api/users")
 public class UserApiController {
     private final UserService userService;
