@@ -11,6 +11,7 @@ import org.hibernate.grammars.hql.HqlParser;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class RecordService {
                 .map(ResponseGetRecord::new).collect(Collectors.toList());
     }
 
-    public List<ResponseGetRecord> getRecordsByDate(LocalDateTime time){
+    public List<ResponseGetRecord> getRecordsByDate(LocalDate time){
         LocalDateTime startTime = LocalDateTime.of(time.getYear(), time.getMonth(), time.getDayOfMonth(), 0, 0, 0);
         LocalDateTime endTimd = LocalDateTime.of(time.getYear(), time.getMonth(), time.getDayOfMonth(), 23, 59, 59);
         Sort sort = Sort.by(Sort.Direction.DESC, "createdTime");

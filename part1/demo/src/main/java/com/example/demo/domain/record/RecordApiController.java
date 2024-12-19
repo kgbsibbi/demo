@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,20 +23,11 @@ public class RecordApiController {
     public ResponseEntity<List<ResponseGetRecord>> findAll(
             @RequestParam(value = "date", defaultValue = "") String date
     ) {
-        if(date.isEmpty()) {
+        if(!date.isEmpty() && date.matches("(19|20)\\d{2}-(0[1-9]|1[0,1,2])-(0[1-9]|[12][0-9]|3[01])")) {
+            LocalDate time = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return ResponseEntity.ok(recordService.getRecordsByDate(time));
+        } else
             return ResponseEntity.ok(recordService.getRecords());
-        } else {
-            try {
-                int year = Integer.parseInt(date.substring(0, 4));
-                int month = Integer.parseInt(date.substring(4, 6));
-                int day = Integer.parseInt(date.substring(6, 8));
-                LocalDateTime time = LocalDateTime.of(year, month, day, 0, 0, 0);
-
-                return ResponseEntity.ok(recordService.getRecordsByDate(time));
-            } catch (NumberFormatException e) {
-                return ResponseEntity.ok(recordService.getRecords());
-            }
-        }
     }
 
     @PostMapping
