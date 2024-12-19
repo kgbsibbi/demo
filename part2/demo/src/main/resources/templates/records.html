@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Records</title>
+    <style>
+      table, tr, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+</head>
+<body>
+  <div th:replace="~{header::nav}"></div>
+  <form>
+    <label for="date">SELECT DATE</label>
+    <input type="date" id="date" name="date">
+    <input type="submit" value="GET">
+  </form>
+  <h1 th:text="${date}"></h1>
+  <table>
+    <tr><th>ID</th><th>Time</th><th>USERNAME</th></tr>
+    <tr th:each="record:${records}">
+      <td th:text="${record.id}"></td>
+      <td th:text="${record.createdTime}"></td>
+      <td th:text="${record.username}"></td>
+    </tr>
+  </table>
+</body>
+</html>
